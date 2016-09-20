@@ -10,6 +10,9 @@
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+.idea/modules.xml
+.idea/misc.xml
+*.iml
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -32,7 +35,7 @@
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+*/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -48,8 +51,5 @@ fabric.properties
 
 ### JetBrains Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
-
-# *.iml
-# modules.xml
-# .idea/misc.xml 
+ 
 # *.ipr
