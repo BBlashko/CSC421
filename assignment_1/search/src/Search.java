@@ -44,6 +44,10 @@ public class Search {
 
     public String DepthLimitedGraphSearch(int limit) { return GraphSearchDepthLimited(new FrontierLIFO(), limit); }
 
+    public String DepthLimitedTreeSearch(int limit) {
+        return TreeSearchDepthLimited(new FrontierLIFO(), limit);
+    }
+
     public String UniformCostGraphSearch() {
         return GraphSearch(new FrontierPriorityQueue(new ComparatorG()));
     }
@@ -75,26 +79,7 @@ public class Search {
     //
 
     private String TreeSearch(Frontier frontier) {
-        cnt = 0;
-        node_list = new ArrayList<Node>();
-
-        initialNode = MakeNode(problem.initialState);
-        node_list.add(initialNode);
-
-        frontier.insert(initialNode);
-        while (true) {
-
-            if (frontier.isEmpty())
-                return null;
-
-            Node node = frontier.remove();
-
-            if (problem.goal_test(node.state))
-                return Solution(node);
-
-            frontier.insertAll(Expand(node, problem));
-            cnt++;
-        }
+		return TreeSearch(frontier, -1);
     }
 
     //None Depth Limited
@@ -131,13 +116,37 @@ public class Search {
 		}
 	}
 	
-	private String TreeSearchDepthLimited(Frontier frontier, int limit) {
-		//TODO
-		return null;
+	private String TreeSearch(Frontier frontier, int limit) {
+		cnt = 0;
+		node_list = new ArrayList<Node>();
+
+		initialNode = MakeNode(problem.initialState);
+		node_list.add(initialNode);
+
+		frontier.insert(initialNode);
+		while (true) {
+
+			if (frontier.isEmpty())
+				return null;
+
+			Node node = frontier.remove();
+
+			if (problem.goal_test(node.state))
+				return Solution(node);
+
+            if (limit < 0 || node.depth < limit ) {
+                frontier.insertAll(Expand(node, problem));
+                cnt++;
+            }
+		}
 	}
 
 	private String GraphSearchDepthLimited(Frontier frontier, int limit) {
         return GraphSearch(frontier, limit);
+	}
+
+	private String TreeSearchDepthLimited(Frontier frontier, int limit) {
+		return TreeSearch(frontier, limit);
 	}
 
 	private Node MakeNode(Object state) {
