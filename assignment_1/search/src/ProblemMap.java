@@ -78,8 +78,12 @@ public class ProblemMap extends Problem {
 		
 		Search search  = new Search(problem);
 
-		//breadth
+		//Breadth First
 		System.out.println("BreadthFirstTreeSearch:\t\t" + search.BreadthFirstTreeSearch());
 		System.out.println("BreadthFirstGraphSearch:\t" + search.BreadthFirstGraphSearch());
+
+		//Depth Limited
+		int limit = 4;
+		System.out.println("DepthLimitedGraphSearch:\t" + search.DepthLimitedGraphSearch(limit));
 	}	
 }
