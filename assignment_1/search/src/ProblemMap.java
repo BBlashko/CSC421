@@ -86,5 +86,8 @@ public class ProblemMap extends Problem {
         int limit = 4;
         System.out.println("DepthLimitedTreeSearch:\t" + search.DepthLimitedTreeSearch(limit));
         System.out.println("DepthLimitedGraphSearch:\t" + search.DepthLimitedGraphSearch(limit));
+
+    	//Iterative Deepening
+		System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch());
     }
 }
