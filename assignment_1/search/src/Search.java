@@ -44,9 +44,7 @@ public class Search {
 
     public String DepthLimitedGraphSearch(int limit) { return GraphSearchDepthLimited(new FrontierLIFO(), limit); }
 
-    public String DepthLimitedTreeSearch(int limit) {
-        return TreeSearchDepthLimited(new FrontierLIFO(), limit);
-    }
+    public String DepthLimitedTreeSearch(int limit) { return TreeSearchDepthLimited(new FrontierLIFO(), limit); }
 
     public String UniformCostGraphSearch() {
         return GraphSearch(new FrontierPriorityQueue(new ComparatorG()));
@@ -63,8 +61,18 @@ public class Search {
 
     //Iterative deepening, tree-search and graph-search
     public String IterativeDeepeningTreeSearch() {
-        //TODO
-        return null;
+        Frontier frontier = new FrontierLIFO();
+
+        for (int limit = 0; ;limit++)
+        {
+            String result = TreeSearchDepthLimited(frontier, limit);
+
+            //if result is null then it is not a solution.
+            if (result != null)
+            {
+                return result;
+            }
+        }
     }
 
     public String IterativeDeepeningGraphSearch() {
@@ -141,12 +149,12 @@ public class Search {
         }
     }
 
-    private String GraphSearchDepthLimited(Frontier frontier, int limit) {
-        return GraphSearch(frontier, limit);
-    }
-
     private String TreeSearchDepthLimited(Frontier frontier, int limit) {
         return TreeSearch(frontier, limit);
+    }
+
+    private String GraphSearchDepthLimited(Frontier frontier, int limit) {
+        return GraphSearch(frontier, limit);
     }
 
     private Node MakeNode(Object state) {
