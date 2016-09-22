@@ -76,8 +76,15 @@ public class Search {
     }
 
     public String IterativeDeepeningGraphSearch() {
-        //TODO
-        return null;
+        String result;
+        int limit = 0;
+        while (true) {
+            result = DepthLimitedGraphSearch(limit);
+            if (result != null) {
+                return result;
+            }
+            limit++;
+        }
     }
 
     //For statistics purposes
