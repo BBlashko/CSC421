@@ -30,7 +30,7 @@ public class Search {
     }
 
     public String AstarTreeSearch() {
-        return TreeSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
+        return TreeSearchAndPrintTree(new FrontierPriorityQueue(new ComparatorF(problem)));
     }
 
     public String AstarGraphSearch() {
@@ -60,11 +60,9 @@ public class Search {
 
     //Iterative deepening, tree-search and graph-search
     public String IterativeDeepeningTreeSearch() {
-        Frontier frontier = new FrontierLIFO();
-
         for (int limit = 0; ;limit++)
         {
-            String result = TreeSearchDepthLimited(frontier, limit);
+            String result = DepthLimitedTreeSearch(limit);
 
             //if result is null then it is not a solution.
             if (result != null)
@@ -88,12 +86,19 @@ public class Search {
 
     //For statistics purposes
     int cnt; //count expansions
-    List<Node> node_list; //store all nodes ever generated
+    ArrayList<Node> node_list; //store all nodes ever generated
     Node initialNode; //initial node based on initial state
     //
 
+    //Run Tree Search and Print out the corresponding Search Tree Nodes
+    private String TreeSearchAndPrintTree(Frontier frontier)
+    {
+        return TreeSearch(frontier, -1, true);
+    }
+
+    //Run regular Tree Search
     private String TreeSearch(Frontier frontier) {
-        return TreeSearch(frontier, -1);
+        return TreeSearch(frontier, -1, false);
     }
 
     //None Depth Limited
@@ -130,7 +135,7 @@ public class Search {
         }
     }
 
-    private String TreeSearch(Frontier frontier, int limit) {
+    private String TreeSearch(Frontier frontier, int limit, boolean print_tree) {
         cnt = 0;
         node_list = new ArrayList<Node>();
 
@@ -146,7 +151,13 @@ public class Search {
             Node node = frontier.remove();
 
             if (problem.goal_test(node.state))
-                return Solution(node);
+            {
+                node.order = cnt;
+                if(print_tree)
+                    return Solution(node, node_list);
+                else
+                    return Solution(node);
+            }
 
             if (limit < 0 || node.depth < limit ) {
                 frontier.insertAll(Expand(node, problem));
@@ -156,7 +167,7 @@ public class Search {
     }
 
     private String TreeSearchDepthLimited(Frontier frontier, int limit) {
-        return TreeSearch(frontier, limit);
+        return TreeSearch(frontier, limit, false);
     }
 
     private String GraphSearchDepthLimited(Frontier frontier, int limit) {
@@ -186,10 +197,16 @@ public class Search {
             s.depth = node.depth + 1;
             successors.add(s);
 
-            node_list.add( s );
+            node_list.add(node_list.indexOf(s.parent_node) + 1, s);
         }
 
         return successors;
+    }
+
+    private String Solution(Node node, ArrayList<Node> search_tree)
+    {
+        PrintTree(search_tree);
+        return Solution(node);
     }
 
     //Create a string to print solution.
@@ -207,5 +224,21 @@ public class Search {
             solution_str += solution.pop() + " ";
 
         return solution_str;
+    }
+
+    //print the search nodes of a tree.
+    private void PrintTree(ArrayList<Node> search_tree)
+    {
+        System.out.println("");
+        for (Node node : search_tree)
+        {
+            for (int i = 0; i < node.depth; i++)
+            {
+                System.out.print("\t");
+            }
+            double g = node.path_cost;
+            double h = problem.h(node.state);
+            System.out.print(node.state + "(g=" + g + ", h=" + h + ", f=" + (g + h) + ") order=" + node.order + "\n");
+        }
     }
 }
