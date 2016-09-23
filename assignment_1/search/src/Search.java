@@ -33,6 +33,10 @@ public class Search {
         return TreeSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
     }
 
+    public String AstarGraphSearch() {
+        return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
+    }
+
     //Graph-search methods
     public String BreadthFirstGraphSearch() {
         return GraphSearch(new FrontierFIFO());
@@ -53,11 +57,6 @@ public class Search {
     public String GreedyBestFirstGraphSearch() {
         return GraphSearch(new FrontierPriorityQueue(new ComparatorH(problem)));
     }
-
-    public String AstarGraphSearch() {
-        return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
-    }
-
 
     //Iterative deepening, tree-search and graph-search
     public String IterativeDeepeningTreeSearch() {

@@ -79,16 +79,19 @@ public class ProblemMap extends Problem {
         Search search  = new Search(problem);
 
         //Breadth First
-        System.out.println("BreadthFirstTreeSearch:\t\t" + search.BreadthFirstTreeSearch());
-        System.out.println("BreadthFirstGraphSearch:\t" + search.BreadthFirstGraphSearch());
+        System.out.println("BreadthFirstTreeSearch:\t\t\t" + search.BreadthFirstTreeSearch());
+        System.out.println("BreadthFirstGraphSearch:\t\t" + search.BreadthFirstGraphSearch());
 
         //Depth Limited
         int limit = 4;
-        System.out.println("DepthLimitedTreeSearch:\t" + search.DepthLimitedTreeSearch(limit));
-        System.out.println("DepthLimitedGraphSearch:\t" + search.DepthLimitedGraphSearch(limit));
+        System.out.println("DepthLimitedTreeSearch:\t\t\t" + search.DepthLimitedTreeSearch(limit));
+        System.out.println("DepthLimitedGraphSearch:\t\t" + search.DepthLimitedGraphSearch(limit));
 
     	//Iterative Deepening
 		System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch());
         System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch());
+
+        //A*
+        System.out.println("AStarTreeSearch:\t\t\t\t" + search.AstarTreeSearch());
     }
 }
