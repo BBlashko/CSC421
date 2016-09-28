@@ -34,7 +34,7 @@ public class Search {
     }
 
     public String AstarGraphSearch() {
-        return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
+        return GraphSearchAndPrintTree(new FrontierPriorityQueue(new ComparatorF(problem)));
     }
 
     //Graph-search methods
@@ -101,14 +101,17 @@ public class Search {
         return TreeSearch(frontier, -1, false);
     }
 
+    // Run Graph Search and print out the tree
+    private String GraphSearchAndPrintTree(Frontier frontier) { return GraphSearch(frontier, -1, true); }
+
     //None Depth Limited
     private String GraphSearch(Frontier frontier)
     {
-        return GraphSearch(frontier, -1);
+        return GraphSearch(frontier, -1, false);
     }
 
     //Depth Limited
-    private String GraphSearch(Frontier frontier, int limit) {
+    private String GraphSearch(Frontier frontier, int limit, boolean print_tree) {
         cnt = 0;
         node_list = new ArrayList<Node>();
 
@@ -125,7 +128,10 @@ public class Search {
             Node node = frontier.remove();
 
             if( problem.goal_test(node.state) )
-                return Solution(node);
+                if (print_tree)
+                    return Solution(node, node_list);
+                else
+                    return Solution(node);
 
             if( !explored.contains(node.state) && (node.depth < limit || limit < 0)) {
                 explored.add(node.state);
@@ -171,7 +177,7 @@ public class Search {
     }
 
     private String GraphSearchDepthLimited(Frontier frontier, int limit) {
-        return GraphSearch(frontier, limit);
+        return GraphSearch(frontier, limit, false);
     }
 
     private Node MakeNode(Object state) {

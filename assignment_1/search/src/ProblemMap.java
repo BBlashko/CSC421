@@ -93,5 +93,6 @@ public class ProblemMap extends Problem {
 
         //A*
         System.out.println("AStarTreeSearch:\t\t\t\t" + search.AstarTreeSearch());
+        System.out.println("AStarGraphSearch:\t\t\t\t" + search.AstarGraphSearch());
     }
 }
