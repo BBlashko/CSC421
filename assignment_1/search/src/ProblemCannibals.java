@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ProblemCannibals extends Problem {
-	
+
     static final int cannL = 0;
     static final int missL = 1;
     static final int boatL = 2;
@@ -10,16 +10,16 @@ public class ProblemCannibals extends Problem {
     static final int missR = 4;
     static final int boatR = 5;
     
-	boolean goal_test(Object state) {
+    boolean goal_test(Object state) {
         StateCannibals can_state = (StateCannibals) state;
         
         if (can_state.canArray[cannR]==3 && can_state.canArray[missR]==3 && can_state.canArray[boatR]==1)
             return true;
         else return false;
-	}
+    }
   
     Set<Object> getSuccessors(Object state) {
-    	
+
         Set<Object> set = new HashSet<Object>();
         StateCannibals can_state = (StateCannibals) state;
         
@@ -35,32 +35,81 @@ public class ProblemCannibals extends Problem {
         if (isValid(successor_state)) set.add(successor_state);
 
         //one cannibal only from right to left
-        //TODO        
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[cannL] += 1;
+        successor_state.canArray[cannR] -= 1;
+        successor_state.canArray[boatL] += 1;
+        successor_state.canArray[boatR] -= 1;
+        if (isValid(successor_state)) set.add(successor_state);
         
         //two cannibals from left to right
-        //TODO
-        
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[cannL] -= 2;
+        successor_state.canArray[cannR] += 2;
+        successor_state.canArray[boatL] -= 1;
+        successor_state.canArray[boatR] += 1;
+        if (isValid(successor_state)) set.add(successor_state);
+
         //two cannibals from right to left 
-        //TODO        
-        
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[cannL] += 2;
+        successor_state.canArray[cannR] -= 2;
+        successor_state.canArray[boatL] += 1;
+        successor_state.canArray[boatR] -= 1;
+        if (isValid(successor_state)) set.add(successor_state);
+
         //one missionary only from left to right 
-        //TODO
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[missL] -= 1;
+        successor_state.canArray[missR] += 1;
+        successor_state.canArray[boatL] -= 1;
+        successor_state.canArray[boatR] += 1;
+        if (isValid(successor_state)) set.add(successor_state);
         
         //one missionary only from right to left 
-        //TODO
-        
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[missL] += 1;
+        successor_state.canArray[missR] -= 1;
+        successor_state.canArray[boatL] += 1;
+        successor_state.canArray[boatR] -= 1;
+        if (isValid(successor_state)) set.add(successor_state);
+
         //two missionaries from left to right 
-        //TODO
-        
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[missL] -= 2;
+        successor_state.canArray[missR] += 2;
+        successor_state.canArray[boatL] -= 1;
+        successor_state.canArray[boatR] += 1;
+        if (isValid(successor_state)) set.add(successor_state);
+
         //two missionaries from right to left 
-        //TODO
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[missL] += 2;
+        successor_state.canArray[missR] -= 2;
+        successor_state.canArray[boatL] += 1;
+        successor_state.canArray[boatR] -= 1;
+        if (isValid(successor_state)) set.add(successor_state);
         
         //one cannibal and one missionary from left to right 
-        //TODO
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[cannL] -= 1;
+        successor_state.canArray[cannR] += 1;
+        successor_state.canArray[missL] -= 1;
+        successor_state.canArray[missR] += 1;
+        successor_state.canArray[boatL] -= 1;
+        successor_state.canArray[boatR] += 1;
+        if (isValid(successor_state)) set.add(successor_state);
         
         //one cannibal and one missionary from right to left 
-        //TODO 
-        
+        successor_state = new StateCannibals(can_state);
+        successor_state.canArray[cannL] += 1;
+        successor_state.canArray[cannR] -= 1;
+        successor_state.canArray[missL] += 1;
+        successor_state.canArray[missR] -= 1;
+        successor_state.canArray[boatL] += 1;
+        successor_state.canArray[boatR] -= 1;
+        if (isValid(successor_state)) set.add(successor_state);
+
         return set;
     }
     
@@ -72,28 +121,41 @@ public class ProblemCannibals extends Problem {
         
         //Checking to see if the numbers of cannibals, missionaries, and boat 
         //are more then 3,3,1 respectively
-        //TODO
-        
+
+        // check for exactly 3 cannibals
+        if (state.canArray[cannL] + state.canArray[cannR] != 3) return false;
+
+        // check for exactly 3 missionaries
+        if (state.canArray[missL] + state.canArray[missR] != 3) return false;
+
+        // check for exactly 1 boat position
+        if (state.canArray[boatL] + state.canArray[boatR] != 1) return false;
+
         //Now, checking if cannibals out number missionaries
-        //TODO
-        
+        if (state.canArray[cannL] > state.canArray[missL]
+                && state.canArray[missL] != 0) return false;
+        if (state.canArray[cannR] > state.canArray[missR]
+                && state.canArray[missR] != 0) return false;
+
         return true;
     }
-	
-	double step_cost(Object fromState, Object toState) { return 1; }
 
-	public double h(Object state) { return 0; }
+    double step_cost(Object fromState, Object toState) { return 1; }
+
+    public double h(Object state) { return 0; }
 
 
-	public static void main(String[] args) throws Exception {
-		ProblemCannibals problem = new ProblemCannibals();
-		int[] canArray = {3,3,1,0,0,0};
-		problem.initialState = new StateCannibals(canArray); 
-		
-		Search search  = new Search(problem);
-		
-		System.out.println("BreadthFirstTreeSearch:\t\t" + search.BreadthFirstTreeSearch());
+    public static void main(String[] args) throws Exception {
+        ProblemCannibals problem = new ProblemCannibals();
+        int[] canArray = {3,3,1,0,0,0};
+        problem.initialState = new StateCannibals(canArray);
 
-		System.out.println("BreadthFirstGraphSearch:\t" + search.BreadthFirstGraphSearch());
-	}
+        Search search  = new Search(problem);
+        
+        // Tree Search
+        System.out.println("BreadthFirstTreeSearch:\t\t" + search.BreadthFirstTreeSearch());
+
+        // Graph Search
+        System.out.println("BreadthFirstGraphSearch:\t\t" + search.BreadthFirstGraphSearch());
+    }
 }
