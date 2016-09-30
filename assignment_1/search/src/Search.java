@@ -30,11 +30,11 @@ public class Search {
     }
 
     public String AstarTreeSearch() {
-        return TreeSearchAndPrintTree(new FrontierPriorityQueue(new ComparatorF(problem)));
+        return TreeSearch(new FrontierPriorityQueue(new ComparatorF(problem)), true);
     }
 
     public String AstarGraphSearch() {
-        return GraphSearchAndPrintTree(new FrontierPriorityQueue(new ComparatorF(problem)));
+        return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)), true);
     }
 
     //Graph-search methods
@@ -91,9 +91,9 @@ public class Search {
     //
 
     //Run Tree Search and Print out the corresponding Search Tree Nodes
-    private String TreeSearchAndPrintTree(Frontier frontier)
+    private String TreeSearch(Frontier frontier, boolean print_tree)
     {
-        return TreeSearch(frontier, -1, true);
+        return TreeSearch(frontier, -1, print_tree);
     }
 
     //Run regular Tree Search
@@ -102,7 +102,7 @@ public class Search {
     }
 
     // Run Graph Search and print out the tree
-    private String GraphSearchAndPrintTree(Frontier frontier) { return GraphSearch(frontier, -1, true); }
+    private String GraphSearch(Frontier frontier, boolean print_tree) { return GraphSearch(frontier, -1, print_tree); }
 
     //None Depth Limited
     private String GraphSearch(Frontier frontier)
@@ -158,7 +158,6 @@ public class Search {
 
             if (problem.goal_test(node.state))
             {
-                node.order = cnt;
                 if(print_tree)
                     return Solution(node, node_list);
                 else
@@ -244,7 +243,15 @@ public class Search {
             }
             double g = node.path_cost;
             double h = problem.h(node.state);
-            System.out.print(node.state + "(g=" + g + ", h=" + h + ", f=" + (g + h) + ") order=" + node.order + "\n");
+            if (node.order < 0)
+            {
+                System.out.print(node.state + "(g=" + g + ", h=" + h + ", f=" + (g + h) + ")\n");
+            }
+            else
+            {
+                System.out.print(node.state + "(g=" + g + ", h=" + h + ", f=" + (g + h) + ") order=" + node.order + "\n");
+            }
+
         }
     }
 }
