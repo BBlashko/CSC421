@@ -151,11 +151,26 @@ public class ProblemCannibals extends Problem {
         problem.initialState = new StateCannibals(canArray);
 
         Search search  = new Search(problem);
-        
-        // Tree Search
-        System.out.println("BreadthFirstTreeSearch:\t\t" + search.BreadthFirstTreeSearch());
 
-        // Graph Search
+        //Depth First Limit
+        int limit = 11;
+
+        //Tree Search
+        System.out.println("TreeSearch----------------------------------");
+        System.out.println("BreadthFirstTreeSearch:\t\t\t" + search.BreadthFirstTreeSearch());
+        System.out.println("UniformCostTreeSearch:\t\t\t" + search.UniformCostTreeSearch());
+        System.out.println("DepthFirstTreeSearch:\t\t\t" + search.DepthFirstTreeSearch());
+        System.out.println("GreedyBestFirstTreeSearch:\t\t" + search.GreedyBestFirstTreeSearch());
+        System.out.println("DepthLimitedTreeSearch:\t\t\t" + search.DepthLimitedGraphSearch(limit));
+        System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch() + "\n");
+
+        //Graph Search
+        System.out.println("GraphSearch----------------------------------");
         System.out.println("BreadthFirstGraphSearch:\t\t" + search.BreadthFirstGraphSearch());
+        System.out.println("UniformCostGraphSearch:\t\t\t" + search.UniformCostGraphSearch());
+        System.out.println("DepthFirstGraphSearch:\t\t\t" + search.DepthFirstGraphSearch());
+        System.out.println("GreedyBestFirstGraphSearch:\t\t" + search.GreedyBestFirstGraphSearch());
+        System.out.println("DepthLimitedGraphSearch:\t\t" + search.DepthLimitedGraphSearch(limit));
+        System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch());
     }
 }

@@ -79,7 +79,8 @@ public class ProblemMap extends Problem {
         Search search  = new Search(problem);
 
         //Depth First Limit
-        int limit = 6;
+        int limit = 4;
+
 
         //Tree Search
         System.out.println("TreeSearch----------------------------------");
