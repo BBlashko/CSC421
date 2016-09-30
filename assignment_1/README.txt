@@ -152,6 +152,18 @@ IterativeDeepeningGraphSearch:	(cost=11.0, expansions=11)	 3 3 1 0 0 0  2 2 0 1 
 ====================================================================================
 Problem 4:
 ====================================================================================
+TreeSearch----------------------------------
+BreadthFirstTreeSearch:			(cost=23.0, expansions=73)	 0 0 0  12 0 0  4 8 0  1 8 3 
+UniformCostTreeSearch:			(cost=17.0, expansions=181)	 0 0 0  0 0 3  0 3 0  0 3 3  0 6 0  0 6 3  0 8 1 
+
+GraphSearch----------------------------------
+BreadthFirstGraphSearch:		(cost=23.0, expansions=18)	 0 0 0  12 0 0  4 8 0  1 8 3 
+UniformCostGraphSearch:			(cost=17.0, expansions=24)	 0 0 0  0 0 3  0 3 0  0 3 3  0 6 0  0 6 3  0 8 1 
+DepthFirstGraphSearch:			(cost=170.0, expansions=36)	 0 0 0  0 8 0  0 5 3  0 0 3  12 0 3  4 8 3  12 8 3  12 8 0  9 8 3  12 5 3  12 5 0  9 8 0  9 0 0  6 0 3  6 8 3  12 2 3  0 2 3  0 2 0  2 0 0  2 0 3  5 0 0  5 8 0  2 8 3  2 8 0  0 8 2  0 8 3  3 8 0  11 0 0  11 0 3  3 8 3  6 8 0  12 2 0  12 0 2  12 0 0  9 0 3  1 8 3 
+
+IterativeDeepening----------------------------------
+IterativeDeepeningTreeSearch:	(cost=23.0, expansions=5)	 0 0 0  12 0 0  4 8 0  1 8 3 
+IterativeDeepeningGraphSearch:	(cost=23.0, expansions=12)	 0 0 0  12 0 0  9 0 3  1 8 3 
 
 ====================================================================================
 Problem 5:
