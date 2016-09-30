@@ -78,21 +78,27 @@ public class ProblemMap extends Problem {
 
         Search search  = new Search(problem);
 
-        //Breadth First
+        //Depth First Limit
+        int limit = 6;
+
+        //Tree Search
+        System.out.println("TreeSearch----------------------------------");
         System.out.println("BreadthFirstTreeSearch:\t\t\t" + search.BreadthFirstTreeSearch());
-        System.out.println("BreadthFirstGraphSearch:\t\t" + search.BreadthFirstGraphSearch());
+        System.out.println("UniformCostTreeSearch:\t\t\t" + search.UniformCostTreeSearch());
+        System.out.println("DepthFirstTreeSearch:\t\t\t" + search.DepthFirstTreeSearch());
+        System.out.println("GreedyBestFirstTreeSearch:\t\t" + search.GreedyBestFirstTreeSearch());
+        System.out.println("DepthLimitedTreeSearch:\t\t\t" + search.DepthLimitedGraphSearch(limit));
+        System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch());
+        System.out.println("AStarTreeSearch:\t\t\t\t" + search.AstarTreeSearch() + "\n");
 
-        //Depth Limited
-        int limit = 4;
-        System.out.println("DepthLimitedTreeSearch:\t\t\t" + search.DepthLimitedTreeSearch(limit));
+        //Graph Search
+        System.out.println("GraphSearch----------------------------------");
+        System.out.println("BreadthFirstGraphSearch:\t\t\t\t" + search.BreadthFirstGraphSearch());
+        System.out.println("UniformCostGraphSearch:\t\t\t" + search.UniformCostGraphSearch());
+        System.out.println("DepthFirstGraphSearch:\t\t\t" + search.DepthFirstGraphSearch());
+        System.out.println("GreedyBestFirstGraphSearch:\t\t" + search.GreedyBestFirstGraphSearch());
         System.out.println("DepthLimitedGraphSearch:\t\t" + search.DepthLimitedGraphSearch(limit));
-
-    	//Iterative Deepening
-		System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch());
         System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch());
-
-        //A*
-        System.out.println("AStarTreeSearch:\t\t\t\t" + search.AstarTreeSearch());
         System.out.println("AStarGraphSearch:\t\t\t\t" + search.AstarGraphSearch());
     }
 }
