@@ -131,7 +131,7 @@ public class ProblemCannibals extends Problem {
         // check for exactly 1 boat position
         if (state.canArray[boatL] + state.canArray[boatR] != 1) return false;
 
-        //Now, checking if cannibals out number missionaries
+//        //Now, checking if cannibals out number missionaries
         if (state.canArray[cannL] > state.canArray[missL]
                 && state.canArray[missL] != 0) return false;
         if (state.canArray[cannR] > state.canArray[missR]
@@ -142,7 +142,10 @@ public class ProblemCannibals extends Problem {
 
     double step_cost(Object fromState, Object toState) { return 1; }
 
-    public double h(Object state) { return 0; }
+    public double h(Object state) {
+        StateCannibals canState = (StateCannibals) state;
+        return canState.canArray[cannL] + canState.canArray[missL];
+    }
 
 
     public static void main(String[] args) throws Exception {
@@ -162,7 +165,8 @@ public class ProblemCannibals extends Problem {
         System.out.println("DepthFirstTreeSearch:\t\t\t" + search.DepthFirstTreeSearch());
         System.out.println("GreedyBestFirstTreeSearch:\t\t" + search.GreedyBestFirstTreeSearch());
         System.out.println("DepthLimitedTreeSearch:\t\t\t" + search.DepthLimitedGraphSearch(limit));
-        System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch() + "\n");
+        System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch());
+        System.out.println("AStarTreeSearch:\t" + search.AstarTreeSearch(false) + "\n");
 
         //Graph Search
         System.out.println("GraphSearch----------------------------------");
@@ -172,5 +176,6 @@ public class ProblemCannibals extends Problem {
         System.out.println("GreedyBestFirstGraphSearch:\t\t" + search.GreedyBestFirstGraphSearch());
         System.out.println("DepthLimitedGraphSearch:\t\t" + search.DepthLimitedGraphSearch(limit));
         System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch());
+        System.out.println("AStarGraphSearch:\t" + search.AstarGraphSearch(false) + "\n");
     }
 }
