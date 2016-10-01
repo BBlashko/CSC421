@@ -144,9 +144,8 @@ public class ProblemCannibals extends Problem {
 
     public double h(Object state) {
         StateCannibals canState = (StateCannibals) state;
-        return canState.canArray[cannL] + canState.canArray[missL];
+        return canState.canArray[cannL] + canState.canArray[missL] - 1;
     }
-
 
     public static void main(String[] args) throws Exception {
         ProblemCannibals problem = new ProblemCannibals();
