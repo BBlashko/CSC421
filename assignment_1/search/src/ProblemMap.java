@@ -90,7 +90,7 @@ public class ProblemMap extends Problem {
         System.out.println("GreedyBestFirstTreeSearch:\t\t" + search.GreedyBestFirstTreeSearch());
         System.out.println("DepthLimitedTreeSearch:\t\t\t" + search.DepthLimitedGraphSearch(limit));
         System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch());
-        System.out.println("AStarTreeSearch:\t\t\t\t" + search.AstarTreeSearch() + "\n");
+        System.out.println("AStarTreeSearch:\t\t\t\t" + search.AstarTreeSearch(true) + "\n");
 
         //Graph Search
         System.out.println("GraphSearch----------------------------------");
@@ -100,6 +100,6 @@ public class ProblemMap extends Problem {
         System.out.println("GreedyBestFirstGraphSearch:\t\t" + search.GreedyBestFirstGraphSearch());
         System.out.println("DepthLimitedGraphSearch:\t\t" + search.DepthLimitedGraphSearch(limit));
         System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch());
-        System.out.println("AStarGraphSearch:\t\t\t\t" + search.AstarGraphSearch());
+        System.out.println("AStarGraphSearch:\t\t\t\t" + search.AstarGraphSearch(true));
     }
 }

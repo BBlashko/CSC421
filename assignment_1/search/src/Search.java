@@ -29,12 +29,12 @@ public class Search {
         return TreeSearch(new FrontierPriorityQueue(new ComparatorH(problem)));
     }
 
-    public String AstarTreeSearch() {
-        return TreeSearch(new FrontierPriorityQueue(new ComparatorF(problem)), true);
+    public String AstarTreeSearch(boolean print_tree) {
+        return TreeSearch(new FrontierPriorityQueue(new ComparatorF(problem)), print_tree);
     }
 
-    public String AstarGraphSearch() {
-        return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)), true);
+    public String AstarGraphSearch(boolean print_tree) {
+        return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)), print_tree);
     }
 
     //Graph-search methods
