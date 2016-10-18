@@ -12,7 +12,10 @@
 **/.idea/jsLibraryMappings.xml
 **/.idea/modules.xml
 **/.idea/misc.xml
+**/.idea/copyright/profiles_settings.xml
+**/.idea/compiler.xml
 *.iml
+*.class
 
 # Sensitive or high-churn files:
 **/.idea/dataSources.ids
