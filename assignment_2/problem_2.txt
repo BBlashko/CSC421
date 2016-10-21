@@ -1,0 +1,49 @@
+================================================================================
+CSC 421 - Assignment 2 - Problem 2
+Brett Blashko
+V00759982
+Charlotte Fedderly
+V00729142
+================================================================================
+
+Variables:
+    {courses, ...}
+    {CSC110, CSC115, CSC421, ...}
+Domain:
+    {term, termslot, timeslot}
+    The domain contains all possible {term. slot, time} for each
+    variable
+
+    {(fall_2016, 1, 08:00-09:00), (fall_2016, 1, 09:00-10:00), ... , (fall_2016, 1, 17:00-18:00),
+     (fall_2016, 2, 08:00-09:00), (fall_2016, 2, 09:00-10:00), ... , (fall_2016, 2, 17:00-18:00),
+     (fall_2016, 3, 08:00-09:00), (fall_2016, 3, 09:00-10:00), ... , (fall_2016, 3, 17:00-18:00),
+     (fall_2016, 4, 08:00-09:00), (fall_2016, 4, 09:00-10:00), ... , (fall_2016, 4, 17:00-18:00),
+
+     (spr_2017, 1, 08:00-09:00), (spr_2017, 1, 09:00-10:00), ... , (spr_2017, 1, 17:00-18:00),
+     (spr_2017, 2, 08:00-09:00), (spr_2017, 2, 09:00-10:00), ... , (spr_2017, 2, 17:00-18:00),
+     (spr_2017, 3, 08:00-09:00), (spr_2017, 3, 09:00-10:00), ... , (spr_2017, 3, 17:00-18:00),
+     (spr_2017, 4, 08:00-09:00), (spr_2017, 4, 09:00-10:00), ... , (spr_2017, 4, 17:00-18:00),
+
+     ...
+}
+
+
+Constraints:
+
+let X, Y be two courses (variables).
+Suppose that an assignment A has (termX, slotX, timeX) for X
+and (termY, slotY, timeY) for Y.
+A is consistent
+
+1) Courses might have prerequisite courses that need to be taken before.
+    if (termX < termY)
+
+2) Some courses are offered in certain terms only.
+    Let L be a list of terms a course is offered in
+    if (X is in L)
+
+3) We want to take no more than 4 courses per term
+    if (termX, slotX) != (termY, slotY).
+
+4) Time conflicts should be avoided
+    if (termX, timeX) != (termY, timeY)
