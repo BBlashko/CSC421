@@ -1,0 +1,250 @@
+Q3. 
+
+formulas(assumptions).
+
+all x all y all z all u all v all w (p(x,y,u)&p(y,z,v)&p(u,z,w)->p(x,v,w)).
+all x all y all z all u all v all w (p(x,y,u)&p(y,z,v)&p(x,v,w)->p(u,z,m)).
+exists e all x (p(x,e,x)&p(e,x,x)&p(x,x,e)).
+
+end_of_list.
+
+formulas(goals).
+
+all x all y all z (p(x,y,z)->p(y,x,z)).
+
+end_of_list.
+
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 15826 was started by charlotte on charlotte-X555LN,
+Mon Nov 14 20:06:47 2016
+The command was "/home/charlotte/Downloads/p9m4-v05/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.00) seconds.
+% Length of proof is 18.
+% Level of proof is 5.
+% Maximum clause weight is 16.
+% Given clauses 25.
+
+1 (all x all y all z all u all w all v5 (p(x,y,u) & p(y,z,w) & p(u,z,v5) -> p(x,w,v5))) # label(non_clause).  [assumption].
+2 (all x all y all z all u all w all v5 (p(x,y,u) & p(y,z,w) & p(x,w,v5) -> p(u,z,m))) # label(non_clause).  [assumption].
+3 (exists e all x (p(x,e,x) & p(e,x,x) & p(x,x,e))) # label(non_clause).  [assumption].
+4 (all x all y all z (p(x,y,z) -> p(y,x,z))) # label(non_clause) # label(goal).  [goal].
+5 -p(x,y,z) | -p(y,u,w) | -p(z,u,v5) | p(x,w,v5).  [clausify(1)].
+6 -p(x,y,z) | -p(y,u,w) | -p(x,w,v5) | p(z,u,m).  [clausify(2)].
+7 p(x,c1,x).  [clausify(3)].
+8 p(c1,x,x).  [clausify(3)].
+9 p(x,x,c1).  [clausify(3)].
+11 -p(c3,c2,c4).  [deny(4)].
+12 p(x,c1,m).  [ur(6,a,7,a,b,7,a,c,7,a)].
+18 -p(c3,x,y) | -p(x,z,c2) | -p(y,z,c4).  [resolve(11,a,5,d)].
+21 p(m,x,m).  [ur(6,a,12,a,b,8,a,c,9,a)].
+25 p(c1,m,x).  [ur(5,a,8,a,b,12,a,c,7,a)].
+32 -p(c1,x,c2) | -p(m,x,c4).  [resolve(18,a,12,a)].
+59 p(m,m,x).  [ur(5,a,9,a,b,21,a,c,8,a)].
+72 -p(m,m,c4).  [resolve(25,a,32,a)].
+73 $F.  [resolve(72,a,59,a)].
+
+============================== end of proof ==========================
+
+Q4)
+
+formulas(assumptions).
+
+all x (hummingbird(x) -> bird(x)).
+all x (hummingbird(x) -> coloured(x)).
+all x (large(x) & bird(x) -> -honey(x)).
+all x (bird(x) & -honey(x) -> -coloured(x)).
+
+end_of_list.
+
+formulas(goals).
+
+all x (hummingbird(x) -> -large(x)).
+
+end_of_list.
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 18.
+% Level of proof is 5.
+% Maximum clause weight is 0.
+% Given clauses 0.
+
+1 (all x (hummingbird(x) -> bird(x))) # label(non_clause).  [assumption].
+2 (all x (hummingbird(x) -> coloured(x))) # label(non_clause).  [assumption].
+3 (all x (large(x) & bird(x) -> -honey(x))) # label(non_clause).  [assumption].
+4 (all x (bird(x) & -honey(x) -> -coloured(x))) # label(non_clause).  [assumption].
+5 (all x (hummingbird(x) -> -large(x))) # label(non_clause) # label(goal).  [goal].
+6 hummingbird(c1).  [deny(5)].
+7 -hummingbird(x) | bird(x).  [clausify(1)].
+8 -hummingbird(x) | coloured(x).  [clausify(2)].
+9 large(c1).  [deny(5)].
+10 -large(x) | -bird(x) | -honey(x).  [clausify(3)].
+11 bird(c1).  [resolve(6,a,7,a)].
+12 -bird(x) | honey(x) | -coloured(x).  [clausify(4)].
+13 -bird(c1) | -honey(c1).  [resolve(9,a,10,a)].
+14 honey(c1) | -coloured(c1).  [resolve(11,a,12,a)].
+15 coloured(c1).  [resolve(6,a,8,a)].
+16 honey(c1).  [resolve(14,b,15,a)].
+17 -honey(c1).  [resolve(13,a,11,a)].
+18 $F.  [resolve(16,a,17,a)].
+
+============================== end of proof ==========================
+
+Q5.)
+
+formulas(assumptions).
+
+all x (gardener(my, x) -> worthListening(x)).
+all x ( remembersWaterloo(x) -> old(x) ).
+all x ( worthListening(x) -> remembersWaterloo(x)).
+
+end_of_list.
+
+formulas(goals).
+
+all x (gardener(my,x) -> old(x) ).
+
+end_of_list.
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 13.
+% Level of proof is 4.
+% Maximum clause weight is 0.
+% Given clauses 0.
+
+1 (exists x (gardener(my,x) -> worthListening(x))) # label(non_clause).  [assumption].
+2 (all x (remembersWaterloo(x) -> old(x))) # label(non_clause).  [assumption].
+3 (all x (worthListening(x) -> remembersWaterloo(x))) # label(non_clause).  [assumption].
+4 (exists x (gardener(my,x) -> old(x))) # label(non_clause) # label(goal).  [goal].
+5 gardener(my,x).  [deny(4)].
+6 -gardener(my,c1) | worthListening(c1).  [clausify(1)].
+7 -worthListening(x) | remembersWaterloo(x).  [clausify(3)].
+8 -remembersWaterloo(x) | old(x).  [clausify(2)].
+9 -worthListening(x) | old(x).  [resolve(7,b,8,a)].
+10 -old(x).  [deny(4)].
+11 -worthListening(x).  [resolve(9,b,10,a)].
+12 worthListening(c1).  [resolve(5,a,6,a)].
+13 $F.  [resolve(11,a,12,a)].
+
+============================== end of proof ==========================
+
+Q6.)
+
+formulas(assumptions).
+
+all x (weddingCake(x) -> food(x)).
+all x (allowed(x) & food(x) -> -rich(x)).
+all x (food(x) & -rich(x) -> allowed(x)).
+all x (agrees(x) -> suitable(x)).
+all x (weddingCake(x) -> rich(x)).
+all x (food(x) & suitable(x) -> allowed(x)).
+
+end_of_list.
+
+formulas(goals).
+
+all x (weddingCake(x) -> -agrees(x)).
+
+end_of_list.
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 20.
+% Level of proof is 5.
+% Maximum clause weight is 2.
+% Given clauses 0.
+
+1 (all x (weddingCake(x) -> food(x))) # label(non_clause).  [assumption].
+2 (all x (allowed(x) & food(x) -> -rich(x))) # label(non_clause).  [assumption].
+4 (all x (agrees(x) -> suitable(x))) # label(non_clause).  [assumption].
+5 (all x (weddingCake(x) -> rich(x))) # label(non_clause).  [assumption].
+6 (all x (food(x) & suitable(x) -> allowed(x))) # label(non_clause).  [assumption].
+7 (all x (weddingCake(x) -> -agrees(x))) # label(non_clause) # label(goal).  [goal].
+8 weddingCake(c1).  [deny(7)].
+9 -weddingCake(x) | food(x).  [clausify(1)].
+10 -weddingCake(x) | rich(x).  [clausify(5)].
+12 -allowed(x) | -food(x) | -rich(x).  [clausify(2)].
+13 -food(x) | -suitable(x) | allowed(x).  [clausify(6)].
+14 agrees(c1).  [deny(7)].
+15 -agrees(x) | suitable(x).  [clausify(4)].
+16 -food(x) | -suitable(x) | -food(x) | -rich(x).  [resolve(13,c,12,a)].
+17 rich(c1).  [resolve(8,a,10,a)].
+18 -food(c1) | -suitable(c1) | -food(c1).  [resolve(16,d,17,a)].
+19 suitable(c1).  [resolve(14,a,15,a)].
+20 food(c1).  [resolve(8,a,9,a)].
+21 -food(c1) | -food(c1).  [resolve(18,b,19,a)].
+22 $F.  [copy(21),merge(b),unit_del(a,20)].
+
+============================== end of proof ==========================
+
+Q7).
+
+formulas(assumptions).
+
+all x((promisebreaker(x) & -promisekeeper(x)) | (-promisebreaker(x) & promisekeeper(x))).
+all x((winedrinker(x) & -teetotaler(x)) | (teetotaler(x) & -winedrinker(x))).
+all x(promisebreaker(x) -> -trustworthy(x)).
+all x(winedrinker(x) -> communicative(x)).
+all x(promisekeeper(x) -> honest(x)).
+all x(teetotaler(x) -> -pawnbroker(x)).
+all x(communicative(x) -> trustworthy(x)).
+
+end_of_list.
+
+formulas(goals).
+
+all x(pawnbroker(x) -> honest(x)).
+
+end_of_list.
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 25.
+% Level of proof is 6.
+% Maximum clause weight is 0.
+% Given clauses 0.
+
+1 (all x (promisebreaker(x) & -promisekeeper(x) | -promisebreaker(x) & promisekeeper(x))) # label(non_clause).  [assumption].
+2 (all x (winedrinker(x) & -teetotaler(x) | teetotaler(x) & -winedrinker(x))) # label(non_clause).  [assumption].
+3 (all x (promisebreaker(x) -> -trustworthy(x))) # label(non_clause).  [assumption].
+4 (all x (winedrinker(x) -> communicative(x))) # label(non_clause).  [assumption].
+5 (all x (promisekeeper(x) -> honest(x))) # label(non_clause).  [assumption].
+6 (all x (teetotaler(x) -> -pawnbroker(x))) # label(non_clause).  [assumption].
+7 (all x (communicative(x) -> trustworthy(x))) # label(non_clause).  [assumption].
+8 (all x (pawnbroker(x) -> honest(x))) # label(non_clause) # label(goal).  [goal].
+10 promisebreaker(x) | promisekeeper(x).  [clausify(1)].
+11 -promisebreaker(x) | -trustworthy(x).  [clausify(3)].
+13 winedrinker(x) | teetotaler(x).  [clausify(2)].
+14 -winedrinker(x) | communicative(x).  [clausify(4)].
+15 -trustworthy(x) | promisekeeper(x).  [resolve(11,a,10,a)].
+16 -promisekeeper(x) | honest(x).  [clausify(5)].
+17 communicative(x) | teetotaler(x).  [resolve(14,a,13,a)].
+18 -teetotaler(x) | -pawnbroker(x).  [clausify(6)].
+19 communicative(x) | -pawnbroker(x).  [resolve(17,b,18,a)].
+20 -communicative(x) | trustworthy(x).  [clausify(7)].
+21 -pawnbroker(x) | trustworthy(x).  [resolve(19,a,20,a)].
+22 pawnbroker(c1).  [deny(8)].
+23 -trustworthy(x) | honest(x).  [resolve(15,b,16,a)].
+24 -honest(c1).  [deny(8)].
+25 -trustworthy(c1).  [resolve(23,b,24,a)].
+26 trustworthy(c1).  [resolve(21,a,22,a)].
+27 $F.  [resolve(25,a,26,a)].
+
+============================== end of proof ==========================
